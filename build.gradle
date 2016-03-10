@@ -4,15 +4,21 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+		
+		maven {
+      		url "https://plugins.gradle.org/m2/"
+   		}
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.flywaydb:flyway-gradle-plugin:3.2.1")
 	}
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot' 
+apply plugin: 'org.flywaydb.flyway'
 
 jar {
 	baseName = 'spring-boot-example'
@@ -25,13 +31,16 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.session:spring-session')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-remote-shell')
+    compile('org.springframework.boot:spring-boot-devtools')
+	compile('mysql:mysql-connector-java:5.1.38')
+	compile('org.flywaydb:flyway-core:3.0')
 	testCompile('org.springframework.boot:spring-boot-starter-test') 
 }
 
@@ -45,4 +54,14 @@ eclipse {
 
 task wrapper(type: Wrapper) {
 	gradleVersion = '2.9'
+}
+
+bootRun {
+    addResources = true
+}
+
+flyway {
+  user='user'
+  password='test'
+  url='jdbc:mysql://localhost/springbootexample_dev'
 }
