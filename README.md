@@ -6,3 +6,7 @@ Contains:
 - Spring Security
 - Thymyleaf
 - Flyway for db migrations
+
+Need:
++ profiles
++ login/logout + security

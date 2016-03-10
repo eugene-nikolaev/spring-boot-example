@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+	<title>Layout</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<link href="../static/css/libs/bootstrap.min.css"
+          th:href="@{css/libs/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+          
+	<link href="../static/css/libs/bootstrap-theme.min.css"
+          th:href="@{css/libs/bootstrap-theme.min.css}" rel="stylesheet" media="screen"/>
+          
+    <link href="../static/css/libs/toastr.min.css"
+          th:href="@{css/libs/toastr.min.css}" rel="stylesheet" media="screen"/>
+          
+	<link href="../static/css/application.css"
+          th:href="@{css/application.css}" rel="stylesheet" media="screen"/>
+
+    <script src="../static/js/libs/jquery-2.2.1.min.js"
+    	    th:src="@{js/libs/jquery-2.2.1.min.js}"></script>
+    
+    <script src="../static/js/libs/toastr.min.js"
+    	    th:src="@{js/libs/toastr.min.js}"></script>
+</head>
+<body>
+	   <script th:if="${notice}" th:inline="javascript">
+	    	var notice = [[${notice}]]
+    		toastr.info(notice);
+    	</script>
+	<div layout:fragment="content"></div>
+</body>
+</html>
