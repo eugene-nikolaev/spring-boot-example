@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.eugnikolaev.springbootexample.routing.Routes;
+
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -20,17 +22,23 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers(Routes.rootPath, "/public/**").permitAll()
+                .antMatchers(Routes.loginPath).anonymous()
+                .antMatchers(Routes.registerPath).anonymous()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .failureUrl("/login?error")
+                .loginPage(Routes.loginPath)
+                .failureUrl(Routes.loginErrorPath)
                 .usernameParameter("email")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .permitAll();
+                .logoutUrl(Routes.logoutPath)
+                .deleteCookies("remember-me")
+                .logoutSuccessUrl(Routes.rootPath)
+                .permitAll()
+                .and()
+                .rememberMe();
     }
 
     @Override

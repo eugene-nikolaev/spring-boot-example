@@ -7,7 +7,16 @@
 </head>
 <body>
 	<div layout:fragment="content" class="container">
-		<p>Hello World!</p>
+		<div th:if="${currentUser}" th:inline="text">
+			<form class="form-inline pull-right" action="#" th:action="@{/logout}" method="post">
+				<span>Logged in as [[${currentUser.username}]]</span>
+				<input class="button btn btn-link" type="submit" value="Logout" />
+			</form>
+			
+		</div>
+		<div  th:if="${currentUser == null}">
+			 Please <a th:href="@{/login}">log in</a> or <a th:href="@{/register}">register</a> 
+		</div>
 	</div>
 </body>
 </html>

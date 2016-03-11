@@ -8,20 +8,16 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
 
     private static final long serialVersionUID = -2777923311145245780L;
 
-    private User user;
+    private Long id;
 
     public CurrentUser(User user) {
         // FIXME: no roles for now
         super(user.getEmail(), user.getEncryptedPassword(), AuthorityUtils.createAuthorityList("user"));
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
+        this.id = user.getId();
     }
 
     public Long getId() {
-        return user.getId();
+        return id;
     }
 
 }

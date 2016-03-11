@@ -11,7 +11,7 @@ import com.eugnikolaev.springbootexample.routing.Routes;
 @Controller
 public class PagesController {
 
-    @RequestMapping("/register")
+    @RequestMapping(Routes.registerPath)
     String register(ModelMap map, RedirectAttributes redirectAttrs) {
         map.put("form", new UserCreateForm());
         return Routes.registerPath;

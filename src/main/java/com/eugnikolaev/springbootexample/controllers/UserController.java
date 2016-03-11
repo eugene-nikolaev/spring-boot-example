@@ -35,7 +35,7 @@ public class UserController {
         binder.addValidators(userCreateFormValidator);
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    @RequestMapping(value = Routes.usersPath, method = RequestMethod.POST)
     public String handleUserCreateForm(
             @Valid @ModelAttribute("form") UserCreateForm form,
             BindingResult bindingResult,
