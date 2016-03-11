@@ -25,7 +25,7 @@
 					<input class="form-control" type="password" th:field="*{passwordConfirmation}" />
 					<span class="help-error" th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}" />
 				</div>
-				<input type="submit" value="Register" />
+				<input class="button btn btn-primary" type="submit" value="Register" />
 			</form>
 		</div>
 	</div>
